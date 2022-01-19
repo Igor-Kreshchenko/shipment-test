@@ -10,7 +10,7 @@ go run main.go
 - http://localhost:8080/v1/api/shipments/:id (get shipment by id)
 - http://localhost:8080/v1/api/shipments (post shipment)
 
-Post request body example:
+Post request body example (for postman):
 
   {
    "senderName": "Nicolas",
