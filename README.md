@@ -1,10 +1,10 @@
 # shipment app
 
-###To run the application:
+### To run the application:
 ``` 
 go run main.go
 ```
-###Endpoints:
+### Endpoints:
 
 - http://localhost:8080/v1/api/shipments (get all shipments)
 - http://localhost:8080/v1/api/shipments/:id (get shipment by id)
