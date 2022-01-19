@@ -24,6 +24,7 @@ require (
 
 require (
 	github.com/Igor-Kreshchenko/go-rest-api v0.0.0-20211031071457-abdfe52ab758
+	github.com/alediaferia/gocountries v0.0.0-20150710192521-aaf4e81715ec
 	github.com/gin-contrib/sse v0.1.0 // indirect
 	github.com/go-playground/locales v0.14.0 // indirect
 	github.com/go-playground/universal-translator v0.18.0 // indirect
@@ -37,6 +38,7 @@ require (
 	github.com/modern-go/concurrent v0.0.0-20180306012644-bacd9c7ef1dd // indirect
 	github.com/modern-go/reflect2 v1.0.2 // indirect
 	github.com/sirupsen/logrus v1.8.1
+	github.com/tchap/go-patricia v2.3.0+incompatible
 	github.com/ugorji/go/codec v1.2.6 // indirect
 	golang.org/x/crypto v0.0.0-20210921155107-089bfa567519 // indirect
 	golang.org/x/sys v0.0.0-20211007075335-d3039528d8ac // indirect

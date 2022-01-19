@@ -1,6 +1,7 @@
 package api
 
 import (
+	"fmt"
 	"net/http"
 	"strconv"
 
@@ -56,7 +57,7 @@ func createNewShipment(shipmentService services.ShipmentService) gin.HandlerFunc
 
 		c.JSON(http.StatusOK, gin.H{
 			"message": "Shipment created",
-			"shipment":    res,
+			"price":   res.Price,
 		})
 	}
 }
@@ -65,6 +66,9 @@ func getShipmentByID(shipmentService services.ShipmentService) gin.HandlerFunc {
 	return func(c *gin.Context) {
 		id := c.Param("id")
 		uid, err := strconv.ParseUint(id, 10, 64)
+		if err != nil {
+			fmt.Println(err)
+		}
 
 		shipment, err := shipmentService.GetShipmentByID(uint(uid))
 		if err != nil {

@@ -1,12 +1,11 @@
 package services
 
 import (
-	// "net/http"
-
 	"fmt"
 
 	"github.com/Igor-Kreshchenko/shipment-test/models"
 	"github.com/Igor-Kreshchenko/shipment-test/repositories"
+	"github.com/biter777/countries"
 
 	"github.com/go-playground/validator"
 )
@@ -51,8 +50,13 @@ func (s *shipmentService) GetAllShipments() ([]models.Shipment, error) {
 }
 
 func (s *shipmentService) CreateNewShipment(shipmentReq *ShipmentRequest) (*models.Shipment, error) {
-	// weightClass := getWeightClass(shipmentReq.Weight)
-	// price := calculatePrice(weightClass)
+	weightClass := getWeightClass(shipmentReq.Weight)
+	multiplier, err := getMultiplier(shipmentReq.SenderCountryCode)
+	if err != nil {
+		return nil, err
+	}
+
+	price := calculatePrice(multiplier, weightClass)
 
 	shipment := models.Shipment{
 		SenderName:           shipmentReq.SenderName,
@@ -64,10 +68,10 @@ func (s *shipmentService) CreateNewShipment(shipmentReq *ShipmentRequest) (*mode
 		RecipientAddress:     shipmentReq.RecipientAddress,
 		RecipientCountryCode: shipmentReq.RecipientAddress,
 		Weight:               shipmentReq.Weight,
-		Price:                100,
+		Price:                price,
 	}
 
-	err := validate(&shipment)
+	err = validate(&shipment)
 	if err != nil {
 		return nil, err
 	}
@@ -89,16 +93,14 @@ func (s *shipmentService) GetShipmentByID(id uint) (*models.Shipment, error) {
 	return shipment, nil
 }
 
-func calculatePrice(region string, weightClass float64) float64 {
-	index := 1
-
-	price := weightClass * float64(index)
+func calculatePrice(multiplier float64, weightClass float64) float64 {
+	price := weightClass * multiplier
 
 	return price
 }
 
 func getWeightClass(weight float64) float64 {
-	weightClass := 0
+	var weightClass float64
 
 	if weight > 0 && weight <= 10 {
 		weightClass = 100
@@ -110,20 +112,29 @@ func getWeightClass(weight float64) float64 {
 		weightClass = 2000
 	}
 
-	return float64(weightClass)
+	return weightClass
 }
 
-// func getIsEU(code string) (bool, err) {
-// 	var country *ApiResponse
+func getMultiplier(countryCode string) (float64, error) {
+	var multiplier float64
 
-// 	url := fmt.Sprintf("https://restcountries.com/v2/alpha/%v", code)
+	if countryCode == "DK" || countryCode == "NO" || countryCode == "SE" || countryCode == "FI" {
+		multiplier = 1
 
-// 	res, err := http.Get(url)
-// 	if err != nil {
-// 		return false, err
-// 	}
+		return multiplier, nil
+	}
 
-// }
+	numericCountryCode := countries.ByName(countryCode)
+	regionCode := numericCountryCode.Region()
+
+	if regionCode != 150 {
+		multiplier = 2.5
+	} else {
+		multiplier = 1.5
+	}
+
+	return multiplier, nil
+}
 
 func validate(s *models.Shipment) error {
 	var validate *validator.Validate = validator.New()
