@@ -23,3 +23,5 @@ Post request body example (for postman):
    "recipientCountryCode": "US",
    "weight": 15
   }
+
+### SQLite for storage
