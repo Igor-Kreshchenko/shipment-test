@@ -51,10 +51,7 @@ func (s *shipmentService) GetAllShipments() ([]models.Shipment, error) {
 
 func (s *shipmentService) CreateNewShipment(shipmentReq *ShipmentRequest) (*models.Shipment, error) {
 	weightClass := getWeightClass(shipmentReq.Weight)
-	multiplier, err := getMultiplier(shipmentReq.SenderCountryCode)
-	if err != nil {
-		return nil, err
-	}
+	multiplier := getMultiplier(shipmentReq.SenderCountryCode)
 
 	price := calculatePrice(multiplier, weightClass)
 
@@ -71,7 +68,7 @@ func (s *shipmentService) CreateNewShipment(shipmentReq *ShipmentRequest) (*mode
 		Price:                price,
 	}
 
-	err = validate(&shipment)
+	err := validate(&shipment)
 	if err != nil {
 		return nil, err
 	}
@@ -115,13 +112,13 @@ func getWeightClass(weight float64) float64 {
 	return weightClass
 }
 
-func getMultiplier(countryCode string) (float64, error) {
+func getMultiplier(countryCode string) float64 {
 	var multiplier float64
 
 	if countryCode == "DK" || countryCode == "NO" || countryCode == "SE" || countryCode == "FI" {
 		multiplier = 1
 
-		return multiplier, nil
+		return multiplier
 	}
 
 	numericCountryCode := countries.ByName(countryCode)
@@ -133,7 +130,7 @@ func getMultiplier(countryCode string) (float64, error) {
 		multiplier = 1.5
 	}
 
-	return multiplier, nil
+	return multiplier
 }
 
 func validate(s *models.Shipment) error {
