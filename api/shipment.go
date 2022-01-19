@@ -25,6 +25,7 @@ func getAllShipments(shipmentService services.ShipmentService) gin.HandlerFunc {
 				"message": "Invalid request",
 				"error":   err.Error(),
 			})
+
 			return
 		}
 
@@ -44,6 +45,7 @@ func createNewShipment(shipmentService services.ShipmentService) gin.HandlerFunc
 				"message": "Invalid request",
 				"error":   err.Error(),
 			})
+
 			return
 		}
 
@@ -52,6 +54,7 @@ func createNewShipment(shipmentService services.ShipmentService) gin.HandlerFunc
 			c.JSON(http.StatusInternalServerError, gin.H{
 				"message": "Server error",
 			})
+
 			return
 		}
 
@@ -75,6 +78,7 @@ func getShipmentByID(shipmentService services.ShipmentService) gin.HandlerFunc {
 			c.JSON(http.StatusBadRequest, gin.H{
 				"error": err.Error(),
 			})
+
 			return
 		}
 

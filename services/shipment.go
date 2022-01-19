@@ -7,7 +7,7 @@ import (
 	"github.com/Igor-Kreshchenko/shipment-test/repositories"
 	"github.com/biter777/countries"
 
-	"github.com/go-playground/validator"
+	"github.com/go-playground/validator/v10"
 )
 
 type ShipmentRequest struct {
@@ -66,7 +66,7 @@ func (s *shipmentService) CreateNewShipment(shipmentReq *ShipmentRequest) (*mode
 		RecipientName:        shipmentReq.RecipientName,
 		RecipientEmail:       shipmentReq.RecipientEmail,
 		RecipientAddress:     shipmentReq.RecipientAddress,
-		RecipientCountryCode: shipmentReq.RecipientAddress,
+		RecipientCountryCode: shipmentReq.RecipientCountryCode,
 		Weight:               shipmentReq.Weight,
 		Price:                price,
 	}
