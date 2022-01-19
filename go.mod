@@ -5,6 +5,8 @@ go 1.17
 require github.com/gin-gonic/gin v1.7.7
 
 require (
+	github.com/biter777/countries v1.3.4 // indirect
+	github.com/go-playground/validator v9.31.0+incompatible // indirect
 	github.com/jackc/chunkreader/v2 v2.0.1 // indirect
 	github.com/jackc/pgconn v1.10.1 // indirect
 	github.com/jackc/pgio v1.0.0 // indirect
@@ -38,6 +40,7 @@ require (
 	github.com/ugorji/go/codec v1.2.6 // indirect
 	golang.org/x/crypto v0.0.0-20210921155107-089bfa567519 // indirect
 	golang.org/x/sys v0.0.0-20211007075335-d3039528d8ac // indirect
+	gopkg.in/go-playground/validator.v9 v9.31.0
 	gopkg.in/yaml.v2 v2.4.0 // indirect
 	gorm.io/driver/postgres v1.2.3
 	gorm.io/driver/sqlite v1.2.6
