@@ -52,7 +52,7 @@ func createNewShipment(shipmentService services.ShipmentService) gin.HandlerFunc
 		res, err := shipmentService.CreateNewShipment(shipmentReq)
 		if err != nil {
 			c.JSON(http.StatusInternalServerError, gin.H{
-				"message": "Server error",
+				"message": "Error",
 			})
 
 			return
