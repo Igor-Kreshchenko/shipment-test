@@ -22,10 +22,6 @@ type ShipmentRequest struct {
 	Weight               float64 `json:"weight"`
 }
 
-type ApiResponse struct {
-	Region string
-}
-
 type ShipmentService interface {
 	GetAllShipments() ([]models.Shipment, error)
 	CreateNewShipment(shipment *ShipmentRequest) (*models.Shipment, error)
