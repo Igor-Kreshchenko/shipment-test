@@ -6,12 +6,15 @@ go run main.go
 ```
 ### Endpoints:
 
-- http://localhost:8080/v1/api/shipments (get all shipments)
-- http://localhost:8080/v1/api/shipments/1 (get shipment by id)
-- http://localhost:8080/v1/api/shipments (post shipment)
+- Get all shipments (GET):
+  http://localhost:8080/v1/api/shipments 
+- Get shipment by id (GET):
+  http://localhost:8080/v1/api/shipments/:id
+- Post shipment (POST):
+  http://localhost:8080/v1/api/shipments 
 
 Post request body example (for postman):
-
+``` 
   {
    "senderName": "Nicolas",
    "senderEmail": "Nicolas.Cage@gmail.com",
@@ -22,6 +25,7 @@ Post request body example (for postman):
    "recipientAddress": "Evanston",
    "recipientCountryCode": "US",
    "weight": 15
-  }
+   }
+```
 
 ### SQLite for storage
